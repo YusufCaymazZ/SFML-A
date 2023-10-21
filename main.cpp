@@ -17,22 +17,14 @@ float takeThePositionX() {
     return x;
 }
 float takeThePositionY() {
-    float y= static_cast<float>(rand() % 600);  
     return y;
 }
 int main() {
     //Creating a object
     shapes a(5);
-    int x = takeThePositionX();
-    int y = takeThePositionY();
     //Creating Shapes
     const int cout = 200 ;
     const float radius = 20.0f;
-    //sf::Vector2f circlePositions[cout];
-    sf::CircleShape circle(20.0F, 100);
-    sf::Color circleColor(128, 0, 128);
-    circle.setFillColor(circleColor);
-    circle.setPosition(x,y);
 	//Creating main window  
 	sf::RenderWindow window(sf::VideoMode(a.w, a.h), "Project Window");
 
@@ -49,7 +41,6 @@ int main() {
                 window.close();
         }
 
-        // Clear screeni
         window.clear(sf::Color::White);
         window.draw(circle);
 
