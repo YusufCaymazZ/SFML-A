@@ -21,25 +21,41 @@ int main() {
 
     //Creating a object
     shapes a(5);
-    //Creating Shapes
+
     const int cout = 200 ;
     const float radius = 5.0f;
     const sf::Color color = sf::Color::Blue;
 
-
-    const float radius = 20.0f;
 	//Creating main window  
 	sf::RenderWindow window(sf::VideoMode(a.w, a.h), "Project Window");
-    sf::CircleShape circle();
-    sf::Vector2f circlePositions[cout];
+    
 
     // Daireleri belirli bir konumda oluþtur
+    sf::CircleShape circles[cout];
+    sf::Vector2f velocities[cout];
+
     for (int i = 0; i < cout; i++)
     {
-        float x = takeThePositionX();
-        float y = takeThePositionY();
-        circlePositions[i] = sf::Vector2f(x, y);
+        circles[i].setRadius(radius);
+        circles[i].setFillColor(color);
+
+        float x = static_cast<float>(rand() % 1200);
+        float y = static_cast<float>(rand() % 760);
+        circles[i].setPosition(x, y);
+
+        float vx = static_cast<float>(rand() % 5 - 2); // Rastgele hýz x bileþeni (-2 ile 2 arasýnda)
+        if (vx == 0) {
+            vx = vx + 1;
+        }
+        float vy = static_cast<float>(rand() % 5 - 2); // Rastgele hýz y bileþeni (-2 ile 2 arasýnda)
+        if (vy == 0) {
+            vy = vy + 1;
+        }
+        velocities[i] = sf::Vector2f(vx, vy);
     }
+
+
+
     while (window.isOpen())
     {
         // Process events
@@ -53,14 +69,14 @@ int main() {
 
         window.clear(sf::Color::White);
 
-
         for (int i = 0; i < cout; i++)
         {
-            sf::CircleShape circle(radius);
-            circle.setFillColor(color);
-            circle.setPosition(circlePositions[i]);
-            window.draw(circle);
+            circles[i].move(velocities[i]); // Her çerçeve için hareket eklenir
+            window.draw(circles[i]);
         }
+
+
+        
 
 
         // Update the window
@@ -74,7 +90,6 @@ int main() {
 
 float takeThePositionX() {
     float x = static_cast<float>(rand() % 1280);
-
     return x;
 }
 
