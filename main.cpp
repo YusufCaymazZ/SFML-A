@@ -13,7 +13,6 @@ using namespace std;
 */
 float takeThePositionX();
 float takeThePositionY();
-float createTheCircle(int cout);
 
 
 
