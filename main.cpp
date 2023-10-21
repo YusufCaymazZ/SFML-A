@@ -11,33 +11,37 @@ using namespace std;
     0 + rand() % 256  // Mavi bileþen
 };
 */
-float takeThePositionX() {
-    float x = static_cast<float>(rand() % 800);
+float takeThePositionX();
+float takeThePositionY();
+float createTheCircle(int cout);
 
-    return x;
-}
-float takeThePositionY() {
-    float y= static_cast<float>(rand() % 600);  
-    return y;
-}
+
+
+
 int main() {
+    sf::Glyph glyph;
+    glyph.lsbDelta = 0; // Baþlatma iþlemi
+
     //Creating a object
     shapes a(5);
-    int x = takeThePositionX();
-    int y = takeThePositionY();
     //Creating Shapes
     const int cout = 200 ;
-    const float radius = 20.0f;
-    //sf::Vector2f circlePositions[cout];
-    sf::CircleShape circle(20.0F, 100);
-    sf::Color circleColor(128, 0, 128);
-    circle.setFillColor(circleColor);
-    circle.setPosition(x,y);
+    const float radius = 5.0f;
+    const sf::Color color = sf::Color::Blue;
+
+
 	//Creating main window  
 	sf::RenderWindow window(sf::VideoMode(a.w, a.h), "Project Window");
+    sf::CircleShape circle();
+    sf::Vector2f circlePositions[cout];
 
-
-    
+    // Daireleri belirli bir konumda oluþtur
+    for (int i = 0; i < cout; i++)
+    {
+        float x = takeThePositionX();
+        float y = takeThePositionY();
+        circlePositions[i] = sf::Vector2f(x, y);
+    }
     while (window.isOpen())
     {
         // Process events
@@ -49,9 +53,16 @@ int main() {
                 window.close();
         }
 
-        // Clear screeni
         window.clear(sf::Color::White);
-        window.draw(circle);
+
+
+        for (int i = 0; i < cout; i++)
+        {
+            sf::CircleShape circle(radius);
+            circle.setFillColor(color);
+            circle.setPosition(circlePositions[i]);
+            window.draw(circle);
+        }
 
 
         // Update the window
@@ -59,6 +70,20 @@ int main() {
     }
 
     return EXIT_SUCCESS;
+}
+
+
+
+float takeThePositionX() {
+    float x = static_cast<float>(rand() % 1280);
+
+    return x;
+}
+
+
+float takeThePositionY() {
+    float y = static_cast<float>(rand() % 760);
+    return y;
 }
 
 

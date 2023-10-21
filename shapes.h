@@ -8,7 +8,7 @@ public:
 		int numOfShapes;
 		int w;
 		int h;
-		shapes(int nums ,int weight = 800,int height = 600 ){ //constructor
+		shapes(int nums ,int weight = 1280,int height = 760 ){ //constructor
 			numOfShapes = nums;
 			w = weight;
 			h = height;
