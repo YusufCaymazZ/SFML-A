@@ -15,8 +15,6 @@ float takeThePositionX();
 float takeThePositionY();
 
 
-
-
 int main() {
     sf::Glyph glyph;
     glyph.lsbDelta = 0; // Baþlatma iþlemi
@@ -29,6 +27,7 @@ int main() {
     const sf::Color color = sf::Color::Blue;
 
 
+    const float radius = 20.0f;
 	//Creating main window  
 	sf::RenderWindow window(sf::VideoMode(a.w, a.h), "Project Window");
     sf::CircleShape circle();
