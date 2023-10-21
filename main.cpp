@@ -13,7 +13,8 @@ using namespace std;
 */
 float takeThePositionX();
 float takeThePositionY();
-
+float takeVxVelocity();
+float takeVxVelocity();
 
 int main() {
     sf::Glyph glyph;
@@ -22,7 +23,7 @@ int main() {
     //Creating a object
     shapes a(5);
 
-    const int cout = 200 ;
+    const int cout = 50 ;
     const float radius = 5.0f;
     const sf::Color color = sf::Color::Blue;
 
@@ -39,11 +40,13 @@ int main() {
         circles[i].setRadius(radius);
         circles[i].setFillColor(color);
 
-        float x = static_cast<float>(rand() % 1200);
-        float y = static_cast<float>(rand() % 760);
+        float x = takeThePositionX();
+        float y = takeThePositionY();
         circles[i].setPosition(x, y);
 
-        float vx = static_cast<float>(rand() % 5 - 2); // Rastgele hýz x bileþeni (-2 ile 2 arasýnda)
+        float vx = takeVxVelocity();
+        float vy = takeVyVelocity();
+
         if (vx == 0) {
             vx = vx + 1;
         }
@@ -72,6 +75,16 @@ int main() {
         for (int i = 0; i < cout; i++)
         {
             circles[i].move(velocities[i]); // Her çerçeve için hareket eklenir
+            sf::Vector2f position = circles[i].getPosition();
+            
+            if (position.x < 0 || position.x >  window.getSize().x || 
+                position.y < 0 || position.y >  window.getSize().y){
+                float x = takeThePositionX();
+                float y = takeThePositionY();
+                circles[i].setPosition(x, y);
+            }
+               
+            
             window.draw(circles[i]);
         }
 
@@ -101,3 +114,15 @@ float takeThePositionY() {
 
 
 
+float takeVxVelocity() {
+    float x = static_cast<float>(rand() % 5 - 2); // Rastgele hýz x bileþeni (-2 ile 2 arasýnda)
+    return x;
+}
+
+float takeVyVelocity() {
+    float y = static_cast<float>(rand() % 5 - 2); // Rastgele hýz x bileþeni (-2 ile 2 arasýnda)
+    return y;
+}
+
+
+    
